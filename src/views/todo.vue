@@ -18,15 +18,11 @@
             <tr v-for="(todo, index) in todos" :key="index">
                 <td>{{index}}</td>
                 <td>{{todo.content}}</td>
-                <td v-if="todo.status">
-                    <input type="button" value="完了" @click="todo.status = false">
+                <td>
+                    <input type="button" value="作業中">
                 </td>
-                <td v-else>
-                    <input type="button" value="未完了" @click="todo.status = true">
-                </td>
-                <td><input type="button" value="削除"></td>
+                <td><input type="button" value="削除" @click="deleteTodo(index)"></td>
             </tr>
-                
             </tbody>
         </table>
         <p>
@@ -58,6 +54,9 @@ export default {
                 status: false
             };
             this.$store.dispatch("addTodo", todo);
+        },
+        deleteTodo(index){
+            this.$store.dispatch("deleteTodo", index);
         }
     }
 }

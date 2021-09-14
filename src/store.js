@@ -18,12 +18,18 @@ export default new Vuex.Store({
               status: status
             };
             state.todos.push(todo);
-          }
+        },
+        delete(state, index) {
+            state.todos.splice(index, 1)
+        }
     },
 
     actions: {
         addTodo({ commit }, todo) {
             commit("addTodo", todo);
+        },
+        deleteTodo({ commit }, index) {
+            commit("delete", index);
         }
     }
 });
