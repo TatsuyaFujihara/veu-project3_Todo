@@ -20,8 +20,6 @@
                 <td>{{todo.content}}</td>
                 <td>
                     <button @click="todo.status = !todo.status">{{ todo.status ? "完了" : "作業中" }}</button>
-                    <!-- <button @click="todo.status = !todo.status">{{todosStatus}}</button> -->
-                    <!-- <input type="button" :v-model="{ ok: todo.status, ng: !todo.status, }" @click="todo.status = !todo.status"> -->
                 </td>
                 <td><input type="button" value="削除" @click="deleteTodo(index)"></td>
             </tr>
@@ -31,7 +29,6 @@
         <label><input type="text" v-model="task"></label>
         <input type="button" value="追加" @click="onAdd">
         </p>
-        <!-- <p class="lists">{{ng[0].status}}</p>         -->
     </div>
 </template>
 
