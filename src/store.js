@@ -8,7 +8,9 @@ export default new Vuex.Store({
         todos: []
     },
     getters: {
-        todos: state => state.todos
+        todos: state => state.todos,
+        isDonetodos: state => state.todos.filter(todo => !todo.status),
+        Donetodos: state => state.todos.filter(todo => todo.status)
     },
 
     mutations: {
