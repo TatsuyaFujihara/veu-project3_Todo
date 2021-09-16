@@ -15,7 +15,7 @@
                 </tr>
             </thead>
         <!-- todo全てを表示 -->
-            <tbody v-if="status == 0">
+            <tbody>
                 <tr v-for="(todo, index) in todos" :key="index">
                     <td>{{index}}</td>
                     <td>{{todo.content}}</td>
@@ -25,32 +25,6 @@
                     <td><input type="button" value="削除" @click="deleteTodo(index)"></td>
                 </tr>
             </tbody>
-
-        <!-- todo全てを表示 -->
-            <tbody v-if="status == 1">
-                <tr v-for="(todo, index) in isDonetodos" :key="index">
-                    <td>{{index}}</td>
-                    <td>{{todo.content}}</td>
-                    <td>
-                        <button @click="todo.status = !todo.status">{{ todo.status ? "完了" : "作業中" }}</button>
-                    </td>
-                    <td><input type="button" value="削除" @click="deleteTodo(index)"></td>
-                </tr>
-            </tbody>
-
-        <!-- todo全てを表示 -->
-            <tbody v-if="status == 2">
-                <tr v-for="(todo, index) in Donetodos" :key="index">
-                    <td>{{index}}</td>
-                    <td>{{todo.content}}</td>
-                    <td>
-                        <button @click="todo.status = !todo.status">{{ todo.status ? "完了" : "作業中" }}</button>
-                    </td>
-                    <td><input type="button" value="削除" @click="deleteTodo(index)"></td>
-                </tr>
-            </tbody>
-
-
         </table>
         <p>
         <label><input type="text" v-model="task"></label>
@@ -70,13 +44,13 @@ export default {
     },
     computed: {
         todos() {
-            return this.$store.getters.todos;
-        },
-        isDonetodos() {
-            return this.$store.getters.isDonetodos;
-        },
-        Donetodos() {
-            return this.$store.getters.Donetodos;
+            if (this.status == 1) {
+                return this.$store.getters.todos.filter(todo => !todo.status);
+            } else if(this.status == 2) {
+                return this.$store.getters.todos.filter(todo => todo.status);
+            } else {
+                return this.$store.getters.todos;
+            }
         }
     },
     methods: {
